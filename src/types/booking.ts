@@ -1,3 +1,5 @@
+import {Option} from "../components/select.component";
+
 export interface PartyComposition {
     adults: number
     childAges: number[]
@@ -5,6 +7,7 @@ export interface PartyComposition {
 }
 
 export interface BookingRequest {
+    filters?: any,
     bookingType: string
     location: string
     departureDate: string
@@ -14,7 +17,26 @@ export interface BookingRequest {
 }
 
 export interface BookingResponse {
+    destination: Destination
     holidays: Holiday[]
+}
+
+export interface Filter {
+    key: string
+    value: any
+}
+
+export type SearchFilter = {
+    name: string,
+    dataKey: string,
+    multiselect: boolean,
+    options: Filter[]
+}
+
+
+interface Destination {
+    name: string
+    gateway: string
 }
 
 export interface Holiday {
@@ -41,7 +63,7 @@ export interface HotelContent {
    hotelDescription: string
    atAGlance: string[]
    parentLocation: string
-   images: HotelImage[]   
+   images: HotelImage[]
    holidayType: string[]
    boardBasis: string[]
    hotelLocation: string[]
@@ -52,7 +74,9 @@ export interface HotelContent {
 }
 
 export interface HotelImage {
-    RESULTS_CAROUSEL: Image
+    RESULTS_CAROUSEL: Image,
+    MOBILE_MAIN: Image,
+    IMAGE_DESCRIPTION: string
 }
 
 export interface Image {

@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7792c5c-848c-46cc-a000-9dfef631b7a2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/filter.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/filter.module.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/results.module.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/listing-tile.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/listing-tile.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/listing-tile.module.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/listing-tile.module.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/select.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/select.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/consts/search.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/consts/search.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/results.route.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/results.route.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/http.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/http.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/booking.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/booking.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +48,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/Menelik/projects/virgin-atlantic-test/src/components",
+    "last_opened_file_path": "/Users/Menelik/projects/virgin-atlantic-test/src/routes",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -51,6 +60,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/routes" />
       <recent name="$PROJECT_DIR$/src/components" />
     </key>
   </component>
@@ -62,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1656531193388</updated>
-      <workItem from="1656531194671" duration="20094000" />
+      <workItem from="1656531194671" duration="36242000" />
     </task>
     <servers />
   </component>

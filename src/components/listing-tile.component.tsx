@@ -1,16 +1,14 @@
 import { h, JSX } from 'preact'
 import * as style from './listing-tile.module.less'
 import { Holiday } from "../types/booking";
+import * as React from "preact/compat";
 
 export default function ListingTileComponent({
     totalPrice = 0,
     pricePerPerson = 0,
-    flyingClubMiles = 0,
-    virginPoints = 0,
-    tierPoints = 0,
     hotel = undefined
 }: Holiday): JSX.Element {
-    const toCurrencyValue = (value: number) => value.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "1,");
+    const toCurrencyValue = (value: number) => value.toFixed(2)/*.replace(/(\d)(?=(\d{3})+(?!\d))/g, "1,")*/;
     const imageData = hotel.content.images[0] // no time for carousels
 
     return (
@@ -30,7 +28,7 @@ export default function ListingTileComponent({
 
                 <div class={style['listing-tile-footer']}>
                     <div class={style['listing-tile-rating']}>
-                        <span>{hotel?.content.starRating} of 5 star rating</span><br/>
+                        {hotel?.content.starRating && <span>{hotel?.content.starRating} of 5 stars</span>}
                     </div>
 
                     <div class={style['listing-tile-price-block']}>

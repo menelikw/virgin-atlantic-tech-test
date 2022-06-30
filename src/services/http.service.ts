@@ -10,7 +10,27 @@ export const doRequest = <T>(method: HttpMethod, url: string, body: BookingReque
       }
       switch (request.status) {
         case 200:
-          resolve(JSON.parse(request.responseText) as T)
+          const results = JSON.parse(request.responseText)
+
+          if (body.filters?.pricePerPerson) {
+            results.holidays = results.holidays.filter(data => {
+              return data.pricePerPerson <= parseInt(body.filters.pricePerPerson, 10)
+            })
+          }
+
+          if (body.filters?.facilities) {
+            results.holidays = results.holidays.filter(data => {
+              return body.filters.facilities.every(facility => data.hotel.content.hotelFacilities.includes(facility))
+            })
+          }
+
+          if (body.filters?.starRating) {
+            results.holidays = results.holidays.filter(data => {
+              return data.hotel.content.starRating == body.filters.starRating
+            })
+          }
+
+          resolve(results as T)
           break
         case 204:
           resolve(undefined)
