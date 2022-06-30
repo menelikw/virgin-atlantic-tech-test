@@ -18,6 +18,7 @@ export const doRequest = <T>(method: HttpMethod, url: string, body: BookingReque
         case 500:
           const isJson = request.getResponseHeader('content-type') === 'application/json'
           reject(isJson ? JSON.parse(request.responseText) : undefined)
+          break
         default:
           reject(undefined)
           break

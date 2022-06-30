@@ -5,6 +5,7 @@ import SearchComponent from '../components/search.component';
 import { doRequest } from '../services/http.service';
 import { BookingRequest, BookingResponse } from '../types/booking';
 import { DateTime } from 'luxon';
+import * as React from "preact/compat";
 
 export default function ResultsRoute(): JSX.Element {
     const [searchParams] = useRouter();

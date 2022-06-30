@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-preact-pure';
 import { NumberComponent } from './number.component';
+import * as React from "preact/compat";
 
 configure({ adapter: new Adapter })
 
