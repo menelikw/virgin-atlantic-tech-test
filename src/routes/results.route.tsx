@@ -1,45 +1,55 @@
-import { h, JSX } from 'preact'
-import { useRouter } from "preact-router";
-import { useEffect } from 'preact/hooks';
+import {JSX, h} from 'preact'
+import {useRouter} from "preact-router";
+import {useEffect, useState} from 'preact/hooks';
 import SearchComponent from '../components/search.component';
-import { doRequest } from '../services/http.service';
-import { BookingRequest, BookingResponse } from '../types/booking';
-import { DateTime } from 'luxon';
+import {doRequest} from '../services/http.service';
+import {BookingRequest, BookingResponse, Holiday} from '../types/booking';
+import {DateTime} from 'luxon';
 import * as React from "preact/compat";
+import ListingTileComponent from "../components/listing-tile.component";
+
+interface SearchParams {
+    departureDate?: string
+    location?: string
+    duration?: number
+    adults?: number
+}
 
 export default function ResultsRoute(): JSX.Element {
     const [searchParams] = useRouter();
+    const [results, setResults] = useState<BookingResponse>({ holidays: []})
 
-    useEffect(() => {
-        const departureDate = DateTime.fromFormat(searchParams?.matches?.departureDate, "yyyy-MM-dd").toFormat("dd-MM-yyyy");
+    const getSearchResults = async (params: SearchParams): Promise<BookingResponse> => {
+        const departureDate = DateTime.fromFormat(params.departureDate, "yyyy-MM-dd").toFormat("dd-MM-yyyy");
         const requestBody: BookingRequest = {
             "bookingType": "holiday",
-            "location": searchParams?.matches?.location,
+            "location": params.location,
             "departureDate": departureDate,
-            "duration": searchParams?.matches?.duration as unknown as number,
+            "duration": params.duration,
             "gateway": "LHR",
             "partyCompositions": [
                 {
-                    "adults": searchParams?.matches?.adults as unknown as number,
+                    "adults": params.adults,
                     "childAges": [],
                     "infants": 0
                 }
             ]
         }
 
-        doRequest('POST', '/cjs-search-api/search', requestBody)
-            .then((response: unknown | BookingResponse) => {
-                // Results are loaded here
-                console.log(response)
-            })
-    }, [searchParams])
+        return await doRequest('POST', '/cjs-search-api/search', requestBody)
+    }
+
+    useEffect(() => {
+        (async () => setResults(await getSearchResults(searchParams?.matches)))();
+    }, [searchParams]);
 
 
     return (
         <section>
             <SearchComponent />
-
-            <h1>Results should display here.</h1>
+            {results.holidays?.length > 0 && results.holidays.map(holiday => <ListingTileComponent { ...holiday } />)}
+            {results.holidays?.length === 0 && (<h1>Results should display here.</h1>)}
+            {!results.holidays && (<h1>No results found</h1>)}
         </section>
     )
 }
