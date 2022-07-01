@@ -20,7 +20,7 @@ interface SearchParams {
 
 export default function ResultsRoute(): JSX.Element {
     const [searchParams] = useRouter();
-    const [results, setResults] = useState<BookingResponse>({ destination: { name: "", gateway: ""}, holidays: []})
+    const [results, setResults] = useState<BookingResponse>({ destination: { name: "", gateway: ""}, holidays: null})
     const [filterValues, setFilterValues] = useState({})
 
     const onFilterSelect = (key, value) => {
@@ -59,17 +59,16 @@ export default function ResultsRoute(): JSX.Element {
             <SearchComponent />
 
             {results.holidays?.length > 0 && <h1>{results.holidays.length} results found for {results.destination.name}</h1>}
-            {results.holidays?.length === 0 && (<h1>Results should display here.</h1>)}
-            {!results.holidays && (<h1>No results found</h1>)}
+            {results.holidays?.length === 0 && <h1>No results found</h1>}
+            {!results.holidays && (<h1>Results should display here.</h1>)}
 
-            {JSON.stringify(filterValues)}
             <div class={style['columns']}>
-                <div>
+                {results.holidays && <div>
                     <h1>Filter your search</h1>
-                    { FILTERS.map(searchFilter => <FilterComponent {...{onFilterSelect, ...searchFilter}} />) }
-                </div>
+                    { FILTERS.map(searchFilter => <FilterComponent key={searchFilter.name} {...{onFilterSelect, ...searchFilter}} />) }
+                </div>}
                 <div>
-                    {results.holidays?.length > 0 && results.holidays.map(holiday => <ListingTileComponent { ...holiday } />)}
+                    {results.holidays?.length > 0 && results.holidays.map(holiday => <ListingTileComponent key={holiday.hotel.id} { ...holiday } />)}
                 </div>
             </div>
         </section>
